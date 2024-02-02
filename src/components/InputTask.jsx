@@ -34,16 +34,24 @@ const InputTask = memo(function InputTask() {
         localStorage.setItem("todos", JSON.stringify(newTodos));
     }, [todos])
 
-    return <div>
-        <input type="text" placeholder="Input a task" onChange={(e) => setTodo(e.target.value)} />
-        <button onClick={() => addTodo()}>Add Task</button>
-
-        <div className="w-80">
-            {todos.map((todo) => {
-                return <div key={todo.id}>
-                    <Todo todo={todo.todo} id={todo.id} deleteFn={deleteTodo} doneFn={doneTodo} />
+    return <div className="flex justify-center">
+        <div className="w-80 flex flex-col gap-5">
+            <div>
+                <label>Task</label>
+                <div className="flex gap-2">
+                    <input type="text" placeholder="Input a task" onChange={(e) => setTodo(e.target.value)} className="p-3 border rounded-md border-black" />
+                    <div className="grid content-center">
+                        <button onClick={() => addTodo()} className="border rounded-md bg-lime-600 text-sm font-light py-2 px-[0.2rem]">Add Task</button>
+                    </div>
                 </div>
-            })}
+            </div>
+            <div className=" flex flex-col gap-4">
+                {todos.map((todo) => {
+                    return <div key={todo.id}>
+                        <Todo todo={todo} id={todo.id} deleteFn={deleteTodo} doneFn={doneTodo} />
+                    </div>
+                })}
+            </div>
         </div>
     </div>
 });
